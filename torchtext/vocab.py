@@ -44,12 +44,12 @@ class Vocab(object):
             vectors: One of either the available pretrained vectors
                 or custom pretrained vectors (see Vocab.load_vectors);
                 or a list of aforementioned vectors
-            revtok_unk: Whether to use ' <unk> ' rather than '<unk>' for
+            revtok_unk: Whether to use ' UNK ' rather than '<unk>' for
                 better compatibility with the revtok detokenizer
         """
         self.freqs = counter.copy()
         min_freq = max(min_freq, 1)
-        unk_token = ' <unk> ' if revtok_unk else '<unk>'
+        unk_token = ' UNK ' if revtok_unk else '<unk>'
         counter.update([unk_token] + specials)
 
         self.stoi = defaultdict(_default_unk_index)
@@ -193,7 +193,7 @@ class SubwordVocab(Vocab):
 
         self.stoi = defaultdict(_default_unk_index)
         self.stoi.update({tok: i + 1 for i, tok in enumerate(specials)})
-        self.itos = [' <unk> '] + specials
+        self.itos = [' UNK '] + specials
 
         self.segmenter = revtok.SubwordSegmenter(counter, max_size)
 

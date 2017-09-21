@@ -220,7 +220,8 @@ class ReversibleField(Field):
         if not self.batch_first:
             batch.t_()
         batch = batch.tolist()
-        batch = [[self.vocab.itos[ind] for ind in ex] for ex in batch] # denumericalize
+        batch = [[self.vocab.itos[ind] for ind in ex] for ex in batch]  # denumericalize
+
         def trim(s, t):
             sentence = []
             for w in s:
@@ -228,9 +229,12 @@ class ReversibleField(Field):
                     break
                 sentence.append(w)
             return sentence
-        batch = [trim(ex, self.eos_token) for ex in batch] # trim past frst eos
+
+        batch = [trim(ex, self.eos_token) for ex in batch]  # trim past frst eos
+
         def filter_special(tok):
             return tok not in (self.init_token, self.pad_token)
+
         batch = [filter(filter_special, ex) for ex in batch]
         return [revtok.detokenize(ex) for ex in batch]
 
