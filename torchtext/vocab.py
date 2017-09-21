@@ -172,7 +172,7 @@ class SubwordVocab(Vocab):
     def segment(self, ex):
         return [tok for word in ex for tok in self.segmenter(word)]
 
-    def __init__(self, counter, max_size=None, specials=['<pad>'],
+    def __init__(self, counter, max_size=None, specials=['<pad>'], revtok_unk=None,
                  vectors=None, unk_init=torch.Tensor.zero_, expand_vocab=False):
         """Create a revtok subword vocabulary from a collections.Counter.
 
