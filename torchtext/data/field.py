@@ -208,7 +208,7 @@ class Field(object):
 class ReversibleField(Field):
 
     def __init__(self, **kwargs):
-        if kwargs.get('tokenize') not in ('revtok', 'subword'):
+        if kwargs.get('tokenize') not in ('revtok', 'subword', list):
             kwargs['tokenize'] = 'revtok'
         if 'unk_token' not in kwargs:
             kwargs['unk_token'] = ' UNK '
